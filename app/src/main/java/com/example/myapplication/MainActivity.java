@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.TextureView;
 import android.view.View;
@@ -36,11 +37,21 @@ public class MainActivity
                         ,
                 datos, MainActivity.this, MainActivity.this);
         ws.execute("GET");
+
+
     }
 
     @Override
     public void processFinish(String result) throws JSONException {
+
         TextView txtRespuesta = findViewById(R.id.txtresp);
-        txtRespuesta.setText(result);
+
+       if (result.equals("Login Correcto!")){
+           Intent intent = new Intent(this, listabanco.class);
+           startActivity(intent);
+    }
+       else {
+           txtRespuesta.setText(result);
+       }
     }
 }
